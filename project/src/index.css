@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    transform-style: preserve-3d;
+  }
+  
+  body {
+    perspective: 1000px;
+  }
+}
+
+@layer components {
+  .card-3d {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.1),
+      0 16px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-3d:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.15),
+      0 16px 32px rgba(0, 0, 0, 0.15),
+      0 32px 64px rgba(0, 0, 0, 0.15);
+  }
+  
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .floating-element:nth-child(2n) {
+    animation-delay: -2s;
+  }
+  
+  .floating-element:nth-child(3n) {
+    animation-delay: -4s;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+    25% { transform: translateY(-10px) rotateZ(1deg); }
+    50% { transform: translateY(-20px) rotateZ(0deg); }
+    75% { transform: translateY(-10px) rotateZ(-1deg); }
+  }
+  
+  .depth-layer-1 {
+    transform: translateZ(10px);
+  }
+  
+  .depth-layer-2 {
+    transform: translateZ(20px);
+  }
+  
+  .depth-layer-3 {
+    transform: translateZ(30px);
+  }
+  
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark .glass-morphism {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(45deg, #00FFFF, #0EA5E9, #8B5CF6);
+    padding: 2px;
+    border-radius: 16px;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: white;
+    border-radius: 14px;
+    z-index: -1;
+  }
+  
+  .dark .gradient-border::before {
+    background: rgb(30, 41, 59);
+  }
+  
+  .perspective-container {
+    perspective: 1200px;
+    perspective-origin: center center;
+  }
+  
+  .tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+  }
+  
+  .tilt-card:hover {
+    transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
+  }
+}
